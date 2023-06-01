@@ -14,7 +14,7 @@ public class Items extends Menu {
     // 3. 기본 생성자
     public Items() {}
 
-    // 3. 생성자(모두 선택) 정의
+    // 3. 생성자(모두 선택) 정의 (순서대로 하면 출력할때 안헷갈림)
     public Items(String index, String name, double price, String description) {
         super(index, name, description);
         this.price = price;
