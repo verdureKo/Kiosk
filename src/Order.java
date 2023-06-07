@@ -9,7 +9,7 @@ public class Order {
     int number =0;
 
     // 메인메뉴(초기화면) 생성
-    public void mainProduct() {
+    public void display() {
         System.out.println("\n\"BOOK STORE 에 오신 것을 환영합니다.\"");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n");
         System.out.println("[ BOOK STORE MENU ]");
@@ -24,24 +24,24 @@ public class Order {
         }
         String i = sc.nextLine();
         if (i.contains("베스트") || i.contains("1") || i.contains("베스트")) {
-            menus("베스트", bestList);
+            menu("베스트", bestList);
         } else if (i.contains("수능완성") || i.contains("2") || i.contains("수능완성")) {
-            menus("수능완성", CSATList);
+            menu("수능완성", CSATList);
         } else if (i.contains("신상품") || i.contains("3") || i.contains("신상품")) {
-            menus("신상품", newList);
+            menu("신상품", newList);
         } else if (i.contains("이벤트") || i.contains("4") || i.contains("이벤트")) {
-            menus("이벤트", eventList);
+            menu("이벤트", eventList);
         } else if (i.contains("Order") || i.contains("5") || i.contains("order")) {
             order();    // 주문 메소드
         } else if (i.contains("Cancel") || i.contains("6") || i.contains("cancel")) {
-            orderCancel();  // 주문취소 메소드
+            cancel();  // 주문취소 메소드
         } else {
             System.out.println("잘못 입력하셨습니다. 상품명을 다시 입력해주세요.");
         }
     }
 
     // 상세 메뉴판을 불러오는 메소드
-    public void menus(String detail, List<Item> detaillist) {
+    public void menu(String detail, List<Item> detaillist) {
         System.out.println("\n[ " + detail + " MENU ]");
         for (Item items: detaillist) {
             System.out.printf("%-1s. %-25s | W %S | %s\n", items.getIndex(), items.getName(), items.getPrice(), items.getDescription());
@@ -62,7 +62,7 @@ public class Order {
             cart.countList(items);
             System.out.println("\n\"" + items.getName() + "\" 이/가 장바구니에 추가되었습니다.\n");
         }
-        mainProduct();
+        display();
     }
 
     public void order() {
@@ -89,11 +89,11 @@ public class Order {
                 System.out.println(e.getMessage());
             };
         }
-        mainProduct();
+        display();
     }
 
     // 주문취소 메소드
-    public void orderCancel() {
+    public void cancel() {
         System.out.println("주문을 취소하시겠습니까?");
         System.out.println("1. 확인            2. 취소");
         String option = sc.nextLine();
@@ -101,7 +101,7 @@ public class Order {
             System.out.println("주문이 취소되었습니다.\n");
             cart.clearCart();   // 리스트 내용 지움
         }
-        mainProduct();
+        display();
     }
 
     // 메인 메뉴 리스트
