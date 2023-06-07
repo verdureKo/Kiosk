@@ -16,21 +16,21 @@ public class Order {
         for (Menu m: menuList) {
             if (Objects.equals(m.getIndex(), "5. ")) {
                 System.out.println("\n[ ORDER MENU ]");
-                System.out.println(m.getIndex() + m.getName() + " | " + m.getDescription());
+                System.out.printf("%-1s. %-10s | %s \n", m.getIndex(), m.getName(), m.getDescription());
 
             } else {
-                System.out.println(m.getIndex() + m.getName() + " | " + m.getDescription());
+                System.out.printf("%-1s. %-25s | %s \n", m.getIndex(), m.getName(), m.getDescription());
             }
         }
         String i = sc.nextLine();
         if (i.contains("베스트") || i.contains("1") || i.contains("베스트")) {
-            Menus("베스트", bestList);
+            menus("베스트", bestList);
         } else if (i.contains("수능완성") || i.contains("2") || i.contains("수능완성")) {
-            Menus("수능완성", CSATList);
+            menus("수능완성", CSATList);
         } else if (i.contains("신상품") || i.contains("3") || i.contains("신상품")) {
-            Menus("신상품", newList);
+            menus("신상품", newList);
         } else if (i.contains("이벤트") || i.contains("4") || i.contains("이벤트")) {
-            Menus("이벤트", eventList);
+            menus("이벤트", eventList);
         } else if (i.contains("Order") || i.contains("5") || i.contains("order")) {
             order();    // 주문 메소드
         } else if (i.contains("Cancel") || i.contains("6") || i.contains("cancel")) {
@@ -41,10 +41,10 @@ public class Order {
     }
 
     // 상세 메뉴판을 불러오는 메소드
-    public void Menus(String detail, List<Item> detaillist) {
+    public void menus(String detail, List<Item> detaillist) {
         System.out.println("\n[ " + detail + " MENU ]");
-        for (Item item : detaillist) {
-            System.out.println(item.getIndex() + item.getName() + " | W " + item.getPrice() + " | " + item.getDescription());
+        for (Item items: detaillist) {
+            System.out.printf("%-1s. %-25s | W %S | %s\n", items.getIndex(), items.getName(), items.getPrice(), items.getDescription());
         }
         String i = sc.nextLine();
         Item items = null;
@@ -60,7 +60,7 @@ public class Order {
         String option = sc.nextLine();
         if (Objects.equals(option, "1")|| Objects.equals(option, "1.") || Objects.equals(option, "확인")) {
             cart.countList(items);
-            System.out.println(items.getName() + " 이/가 장바구니에 추가되었습니다.\n");
+            System.out.println("\n\"" + items.getName() + "\" 이/가 장바구니에 추가되었습니다.\n");
         }
         mainProduct();
     }
@@ -68,13 +68,13 @@ public class Order {
     public void order() {
         System.out.println("\n아래와 같이 주문 하시겠습니까?\n");
         System.out.println("[ Orders ]");
-        for (Item item : cart.getCartList()) {
-            System.out.println(item.getIndex() + item.getName() + " | W " + item.getPrice() + " | " + item.getDescription());
+        for (Item items: cart.getCartList()) {
+            System.out.printf("%-1s. %-25s | W %S | %s\n", items.getIndex(), items.getName(), items.getPrice(), items.getDescription());
         }
         System.out.println("\n[ Total ]");
         double sum = 0;
-        for (Item item : cart.getCartList()) {
-            sum += item.getPrice();
+        for (Item items: cart.getCartList()) {
+            sum += items.getPrice();
         }
         System.out.println("W " + sum);
         System.out.println("\n1. 주문            2. 메뉴판");
